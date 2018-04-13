@@ -1,0 +1,37 @@
+<div class="logo-header"></div>
+
+<clr-main-container>
+    <clr-header class="header-6">
+        <div class="branding">
+            <a href="..." class="nav-link">
+                <clr-icon shape="vm-bug"></clr-icon>
+                <span class="title">Project Clarity</span>
+            </a>
+        </div>
+        <div class="header-nav" [clr-nav-level]="1">
+            <a class="nav-link" href="#" [routerLink]="['/home']" routerLinkActive="active"><span class="nav-text">Home</span></a>
+            <a class="nav-link" href="#" [routerLink]="['/about']" routerLinkActive="active"><span class="nav-text">About</span></a>
+        </div>
+        <div class="hidden-sm-down">
+        <form class="search">
+            <label for="search_input">
+                <input id="search_input" type="text" placeholder="Search for keywords...">
+            </label>
+        </form>
+        </div>
+        <div class="header-actions">
+            <clr-dropdown>
+            <button class="nav-icon" clrDropdownTrigger>
+            <clr-icon shape="user"></clr-icon>
+            <clr-icon shape="caret down"></clr-icon>
+            </button>
+            <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+            <a href="..." clrDropdownItem>About</a>
+            <a href="..." clrDropdownItem>Preferences</a>
+            <a href="..." clrDropdownItem>Log out</a>
+            </clr-dropdown-menu>
+            </clr-dropdown>
+        </div>
+    </clr-header>
+    <router-outlet></router-outlet>
+</clr-main-container>

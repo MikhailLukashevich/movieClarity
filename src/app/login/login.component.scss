@@ -1,0 +1,42 @@
+.wrapper{
+    margin-top:20px;
+}
+
+.card-header{
+    text-align:center;
+}
+
+.test{
+    width:80%;
+}
+
+.invalid{
+    font-family:sans-serif;
+    font-size:14px;
+    margin-bottom:0;
+    margin-top:5px;
+    color:darkred;
+}
+
+.has-error{
+    border-bottom:1px solid darkred !important;
+}
+
+.ng-invalid.ng-touched:not(form){
+    background:none;
+}
+
+@media (max-width:768px){
+    .xsInput{
+        padding:0 15px;
+    }
+}
+
+//@media (min-width:1420px){
+//    .card {
+//        width: 80%;
+//    }
+//    .test{
+//
+//    }
+//}

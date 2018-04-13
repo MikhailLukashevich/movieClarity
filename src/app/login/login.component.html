@@ -1,0 +1,71 @@
+<div class="wrapper">
+    <div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 offset-md-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+            <div class="test mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    Sign in to your account
+                </div>
+                <div class="card-block">
+
+                    <form [formGroup]="userForm">
+
+                        <div class="xsInput">
+                            <div class="form-group row">
+                                <div class="col-xs-8 offset-xs-2">
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        formControlName="email"
+                                        placeholder="Логин"
+                                        [ngClass]="{'has-error': isFieldInvalid('email')}"
+                                        required/>
+                                    <div *ngIf="formErrors.email" class="invalid" [hidden]="!FieldInValid">
+                                        {{ formErrors.email }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-md-center">
+                            <div class="col-sm">
+                                <div class="xsInput">
+                                    <div class="form-group row">
+                                        <div class="col-xs-8 offset-xs-2">
+                                            <input
+                                                type="password"
+                                                class="form-control"
+                                                placeholder="Пароль"
+                                                formControlName="password"
+                                                [ngClass]="{'has-error': isFieldInvalid('password')}"
+                                                required/>
+                                            <div *ngIf="formErrors.password" class="invalid" [hidden]="!isFieldInvalid('password')">
+                                                {{ formErrors.password }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-md-center">
+                            <div class="col-xs-12 text-center">
+                                <button
+                                    type="button"
+                                    class="btn btn-lg btn-default"
+                                    [disabled]="!formEnable"
+                                    (click)="onSubmit()">Войти
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
