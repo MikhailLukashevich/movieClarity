@@ -1,1 +1,60 @@
-<p>Home page</p>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 offset-md-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2">
+            <div class="carousel">
+            <ngu-carousel [inputs]="carousel"
+                (initData)="initDataFn($event)"
+                (onMove)="onmoveFn($event)"
+                (afterCarouselViewed)="afterCarouselViewedFn($event)"
+                (carouselLoad)="carouselLoad()">
+                <ngu-item NguCarouselItem *ngFor="let item of items">
+                    <div class="my-panel">
+                        <img src="{{item.img}}"/>
+                        <!--<h4>{{item.title}}</h4>-->
+                    </div>
+                </ngu-item>
+
+                <button NguCarouselPrev class="leftRs"><clr-icon shape="rewind"></clr-icon></button>
+                <button NguCarouselNext class="rightRs"><clr-icon shape="fast-forward"></clr-icon></button>
+            </ngu-carousel>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="home-wrapper">
+    <div class="container">
+        <div class="row">
+
+            <ng-container *ngFor="let item of items">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="card">
+                    <div class="card-block">
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5">
+                                <img src="{{item.img}}"/>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7">
+                                <div class="my-card-text">
+                                    <div class="title">
+                                        <h4>{{item.title}}</h4>
+                                        <clr-icon shape="star" class="is-solid my-star"></clr-icon>
+                                        <clr-icon shape="star" class="is-solid my-star"></clr-icon>
+                                        <clr-icon shape="star" class="is-solid my-star"></clr-icon>
+                                    </div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, porro.</p>
+                                    <div class="btn-more">
+                                        <clr-icon shape="redo"></clr-icon> Read more
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            </ng-container>
+
+        </div>
+    </div>
+</div>

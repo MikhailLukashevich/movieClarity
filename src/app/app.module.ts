@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClarityModule } from '@clr/angular';
 import { ROUTING } from "./app.routing";
+import { NguCarouselModule } from '@ngu/carousel';
+import 'hammerjs';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from "./home/home.component";
@@ -25,6 +27,7 @@ import { LoginComponent } from './login/login.component';
         FormsModule,
         ReactiveFormsModule,
         ClarityModule,
+        NguCarouselModule,
         ROUTING
     ],
     providers: [],
