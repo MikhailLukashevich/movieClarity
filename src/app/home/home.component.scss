@@ -3,14 +3,12 @@
 }
 
 .my-panel {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    margin-left: 10px;
+    margin-right: 10px;
     height: 200px;
 }
-
-//.panel img{
-//    display: block;
-//    width: 200px;
-//    height: 200px;
-//}
 // start btn carousel
 
 .leftRs {
@@ -91,9 +89,8 @@
 
 img{
     display: block;
-    width: 90%;
+    width: 100%;
     height: 200px;
-    margin:10px 5px 10px 5px;
 }
 
 img:hover{
