@@ -23,7 +23,8 @@ export class HomeComponent implements OnInit{
             new HomeItem('Disney', 1, '../../images/cartoon.jpg', 'action', 1920),
             new HomeItem('One day', 1, '../../images/drama.jpg', 'action', 1920),
             new HomeItem('Ural dumplings', 1, '../../images/comedy.jpg', 'action', 1920),
-            new HomeItem('Documentary', 1, '../../images/documentary.jpg', 'action', 1920)
+            new HomeItem('Documentary', 1, '../../images/documentary.jpg', 'action', 1920),
+            new HomeItem('Alone home', 1, '../../images/aloneHome.jpg', 'action', 1920)
         ];
 
         this.carouselService.getData.subscribe((value => {
@@ -33,7 +34,7 @@ export class HomeComponent implements OnInit{
         }));
 
         this.carousel = {
-            grid: {xs: 1, sm: 2, md: 3, lg: 3, all: 0},
+            grid: {xs: 1, sm: 2, md: 3, lg: 4, all: 0},
             slide: 1,
             speed: 1200,
             interval: 5000,

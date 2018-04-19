@@ -23,11 +23,11 @@ export class LoginComponent implements OnInit {
 
     validationMessages = {
         'email': {
-            'required': 'Укажите свой логин.',
-            'pattern': 'Введите действительный e-mail.'
+            'required': 'Please specify your login.',
+            'pattern': 'Please enter valid e-mail.'
         },
         'password': {
-            'required': 'Укажите свой пароль.'
+            'required': 'Please specify your password.'
         }
     };
 

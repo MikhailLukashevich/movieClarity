@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
     selector: 'my-app',
@@ -7,6 +7,16 @@ import { Router } from '@angular/router';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+    isHiddenFooter = false;
     constructor(private router: Router) {
+        this.router.events.subscribe(
+            (event) => {
+
+                if (event instanceof NavigationEnd) {
+                    this.isHiddenFooter =  (this.router.url === '/login');
+                }
+            }
+        );
     }
 }

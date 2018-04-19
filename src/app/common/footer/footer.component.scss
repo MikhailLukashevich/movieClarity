@@ -13,3 +13,13 @@ ul {
 .info{
     text-align:center;
 }
+
+@media only screen and (max-width: 544px) {
+
+    .footer {
+        background-color:#bfbfbf;
+        padding-top: 20px;
+        width: 100%;
+        height: 300px;
+    }
+}
