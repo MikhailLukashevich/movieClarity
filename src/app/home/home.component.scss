@@ -117,6 +117,10 @@ img:hover{
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
+
+    .my-card-text{
+        margin-top:15px;
+    }
     .btn-more{
         color:red;
         margin-top:25px;
@@ -128,7 +132,6 @@ img:hover{
     .my-card-text{
         margin-top:15px;
     }
-
     .btn-more{
         color:blue;
         margin-top:25px;
