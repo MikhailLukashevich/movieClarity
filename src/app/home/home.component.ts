@@ -9,7 +9,7 @@ import { HomeItem } from './home.model';
 })
 export class HomeComponent implements OnInit{
 
-    private items: HomeItem[] = [];
+    public items: HomeItem[] = [];
     public carousel: NguCarousel;
     public carouselStore: NguCarouselStore;
 
