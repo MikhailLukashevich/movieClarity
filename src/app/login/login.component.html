@@ -5,11 +5,26 @@
             <div class="test mx-auto">
             <div class="card">
                 <div class="card-header">
-                    Sign in to your account
+                    <div class="row">
+                        <div class="col-xs-6">
+                             <button 
+                             class="btn btn-link" 
+                             (click)="onTemplateEnter()"
+                             [ngClass]="{'btn-active': isEnter}"
+                             >Вход</button>
+                        </div>
+                        <div class="col-xs-6">
+                            <button 
+                            class="btn btn-link" 
+                            (click)=" onTemplateRegistration()"
+                            [ngClass]="{'btn-active': isRegistration}"
+                            >Регистрация</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-block">
-
-                    <form [formGroup]="userForm">
+            
+                    <form *ngIf="isEnter" [formGroup]="userForm">
 
                         <div class="xsInput">
                             <div class="form-group row">
@@ -60,6 +75,58 @@
                             </div>
                         </div>
 
+                    </form>
+
+                    <form *ngIf="isRegistration" [formGroup]="userFormRegistration">
+                        <div class="xsInput">
+                            <div class="form-group row">
+                                <div class="col-xs-8 offset-xs-2">
+                                        <input
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Логин"
+                                        formControlName="emailRegistration"
+                                        required/>
+                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="xsInput">
+                                <div class="form-group row">
+                                    <div class="col-xs-8 offset-xs-2">
+                                            <input
+                                            type="password"
+                                            class="form-control"
+                                            placeholder="Пароль"
+                                            formControlName="passwordRegistration1"
+                                            required/>
+                                     </div>
+                                </div>
+                        </div>
+
+                        <div class="xsInput">
+                                <div class="form-group row">
+                                    <div class="col-xs-8 offset-xs-2">
+                                            <input
+                                            type="password"
+                                            class="form-control"
+                                            placeholder="Пароль еще раз"
+                                            formControlName="passwordRegistration2"
+                                            required/>
+                                     </div>
+                                </div>
+                        </div>
+
+                        <div class="row justify-content-md-center">
+                                <div class="col-xs-12 text-center">
+                                    <button
+                                        type="button"
+                                        class="btn btn-lg btn-default"
+                                        [disabled]="!formEnable"
+                                        (click)="onRegistration()">Регистрация
+                                    </button>
+                                </div>
+                            </div>
                     </form>
 
                 </div>

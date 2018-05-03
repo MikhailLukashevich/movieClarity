@@ -26,6 +26,10 @@
     background:none;
 }
 
+.btn-active{
+    border-bottom: 2px solid #0077b7; /* Параметры линии внизу */
+}
+
 @media (max-width:768px){
     .xsInput{
         padding:0 15px;

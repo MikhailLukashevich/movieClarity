@@ -14,7 +14,7 @@ export class AppComponent {
             (event) => {
 
                 if (event instanceof NavigationEnd) {
-                    this.isHiddenFooter =  (this.router.url === '/login');
+                    this.isHiddenFooter =  (this.router.url === '/login' || this.router.url === '/not-found');
                 }
             }
         );

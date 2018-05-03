@@ -3,7 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClarityModule } from '@clr/angular';
-import { ROUTING } from "./app.routing";
+import { AppRoutingModule} from './app.routing';
+
 import { NguCarouselModule } from '@ngu/carousel';
 import 'hammerjs';
 
@@ -13,6 +14,7 @@ import { AboutComponent } from "./about/about.component";
 import { HeaderComponent } from './common/header/header.component';
 import { LoginComponent } from './login/login.component';
 import { FooterComponent } from './common/footer/footer.component';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
     declarations: [
@@ -21,16 +23,17 @@ import { FooterComponent } from './common/footer/footer.component';
         HomeComponent,
         HeaderComponent,
         LoginComponent,
-        FooterComponent
+        FooterComponent,
+        ErrorComponent
     ],
     imports: [
+        AppRoutingModule,
         BrowserAnimationsModule,
         BrowserModule,
         FormsModule,
         ReactiveFormsModule,
         ClarityModule,
         NguCarouselModule,
-        ROUTING
     ],
     providers: [],
     bootstrap: [AppComponent]

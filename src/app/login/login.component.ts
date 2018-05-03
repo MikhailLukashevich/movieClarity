@@ -11,10 +11,13 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
     userForm: FormGroup;
+    userFormRegistration: FormGroup;
     subscrValueChange: Subscription;
     message: string = null;
     formEnable: boolean = true;
     FieldInValid: boolean;
+    isEnter: boolean = true;
+    isRegistration: boolean;
 
     formErrors = {
         'email': '',
@@ -51,6 +54,37 @@ export class LoginComponent implements OnInit {
                 ]
             ],
             'password': [
+                {
+                    value: '',
+                    disabled: false
+                },
+                [
+                    Validators.required
+                ]
+            ]
+        });
+
+        this.userFormRegistration = this.fb.group({
+            'emailRegistration': [
+                {
+                    value: '',
+                    disabled: false
+                },
+                [
+                    Validators.required,
+                    Validators.pattern('[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}')
+                ]
+            ],
+            'passwordRegistration1': [
+                {
+                    value: '',
+                    disabled: false
+                },
+                [
+                    Validators.required
+                ]
+            ],
+            'passwordRegistration2': [
                 {
                     value: '',
                     disabled: false
@@ -126,6 +160,28 @@ export class LoginComponent implements OnInit {
         } else {
             this.validateAllFormFields(this.userForm);
         }
+    }
+
+    onRegistration() {
+        console.log("onRegistration");
+        this.FieldInValid = true;
+        this.onValueChange();
+        if (this.userFormRegistration.valid) {
+            this.router.navigate(['/']);
+
+        } else {
+            this.validateAllFormFields(this.userFormRegistration);
+        }
+    }
+
+    onTemplateEnter() {
+        this.isEnter = true;
+        this.isRegistration = false;
+    }
+
+    onTemplateRegistration() {
+        this.isRegistration = true;
+        this.isEnter = false; 
     }
 
 }
