@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
     FieldInValid: boolean;
     isEnter: boolean = true;
     isRegistration: boolean;
+    error: String;
 
     formErrors = {
         'email': '',
@@ -26,16 +28,17 @@ export class LoginComponent implements OnInit {
 
     validationMessages = {
         'email': {
-            'required': 'Please specify your login.',
-            'pattern': 'Please enter valid e-mail.'
+            'required': 'Укажите Ваш логин.',
+            // 'pattern': 'Please enter valid e-mail.'
         },
         'password': {
-            'required': 'Please specify your password.'
+            'required': 'Укажите Ваш пароль.'
         }
     };
 
     constructor(private fb: FormBuilder,
-                private router: Router) { }
+                private router: Router,
+                private user: UserService,) { }
 
     ngOnInit() {
         this.createForm();
@@ -50,7 +53,7 @@ export class LoginComponent implements OnInit {
                 },
                 [
                     Validators.required,
-                    Validators.pattern('[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}')
+                    // Validators.pattern('[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}')
                 ]
             ],
             'password': [
@@ -154,8 +157,32 @@ export class LoginComponent implements OnInit {
     onSubmit() {
         this.FieldInValid = true;
         this.onValueChange();
+        console.log("this.userForm.valid:  ", this.userForm.valid);
+        const username = this.userForm.value.email;
+        const password = this.userForm.value.password;
         if (this.userForm.valid) {
-            this.router.navigate(['/']);
+            this.user.login(username, password).subscribe(
+                (success) => {
+        
+                  if (success) {
+        
+                    console.log('all is good!!!')
+                    this.router.navigate(['/']);
+                    // console.log('test message');
+        
+                  } else {
+                    // place error handling here
+                    this.error = 'Пожалуйста, проверьте Ваш логин или пароль.';
+                    console.log('Пожалуйста, проверьте Ваш логин или пароль.');
+                    // this.blockButton = false;
+                  }
+        
+                },
+                (error) => {
+                  console.log(error);
+                  // place error handling here
+                }
+              );this.router.navigate(['/']);
 
         } else {
             this.validateAllFormFields(this.userForm);

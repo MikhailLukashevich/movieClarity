@@ -22,8 +22,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-block">
-            
+                  
+                <div class="card-block"> 
+                    <div *ngIf="error" class="alert alert-danger">
+                            <div class="alert-items">
+                                <div class="alert-item static">
+                                    <span class="alert-text">
+                                            {{error}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     <form *ngIf="isEnter" [formGroup]="userForm">
 
                         <div class="xsInput">
