@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
+import {ClrWizard} from "@clr/angular";
+
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -10,6 +12,9 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
+    @ViewChild("wizardlg") wizardLarge: ClrWizard;
+    lgOpen: boolean = false;
 
     userForm: FormGroup;
     userFormRegistration: FormGroup;
@@ -23,7 +28,10 @@ export class LoginComponent implements OnInit {
 
     formErrors = {
         'email': '',
-        'password': ''
+        'password': '',
+        'emailRegistration': '',
+        'passwordRegistration1': '',
+        'passwordRegistration2': ''
     };
 
     validationMessages = {
@@ -74,8 +82,7 @@ export class LoginComponent implements OnInit {
                     disabled: false
                 },
                 [
-                    Validators.required,
-                    Validators.pattern('[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}')
+                    Validators.required
                 ]
             ],
             'passwordRegistration1': [
@@ -163,52 +170,34 @@ export class LoginComponent implements OnInit {
         if (this.userForm.valid) {
             this.user.login(username, password).subscribe(
                 (success) => {
-        
+
                   if (success) {
-        
+
                     console.log('all is good!!!')
                     this.router.navigate(['/']);
                     // console.log('test message');
-        
+
                   } else {
                     // place error handling here
                     this.error = 'Пожалуйста, проверьте Ваш логин или пароль.';
                     console.log('Пожалуйста, проверьте Ваш логин или пароль.');
                     // this.blockButton = false;
                   }
-        
+
                 },
                 (error) => {
                   console.log(error);
                   // place error handling here
                 }
-              );this.router.navigate(['/']);
+              ); this.router.navigate(['/']);
 
         } else {
             this.validateAllFormFields(this.userForm);
         }
     }
 
-    onRegistration() {
-        console.log("onRegistration");
-        this.FieldInValid = true;
-        this.onValueChange();
-        if (this.userFormRegistration.valid) {
-            this.router.navigate(['/']);
-
-        } else {
-            this.validateAllFormFields(this.userFormRegistration);
-        }
-    }
-
-    onTemplateEnter() {
-        this.isEnter = true;
-        this.isRegistration = false;
-    }
-
-    onTemplateRegistration() {
-        this.isRegistration = true;
-        this.isEnter = false; 
+    onOpen() {
+        this.lgOpen = true;
     }
 
 }
