@@ -27,58 +27,58 @@
                                 <clr-wizard-button [type]="'next'">Next</clr-wizard-button>
                                 <clr-wizard-button [type]="'finish'">Finish</clr-wizard-button>
 
-                                <!--<clr-wizard-page>-->
-                                    <!--<ng-template clrPageTitle>Логин & пароль</ng-template>-->
-                                    <!--<div class="title-credential-registration">-->
-                                        <!--Пожалуйста, укажите Ваш логин и пароль.-->
-                                    <!--</div>-->
+                                <clr-wizard-page>
+                                    <ng-template clrPageTitle>Логин & пароль</ng-template>
+                                    <div class="title-credential-registration">
+                                        Пожалуйста, укажите Ваш логин и пароль.
+                                    </div>
 
-                                    <!--<form [formGroup]="userFormRegistration">-->
-                                        <!--<div class="xsInput">-->
-                                            <!--<div class="form-group row">-->
-                                                <!--<div class="col-xs-8 offset-xs-2">-->
-                                                    <!--<input-->
-                                                        <!--type="text"-->
-                                                        <!--class="form-control"-->
-                                                        <!--placeholder="Логин"-->
-                                                        <!--formControlName="emailRegistration"-->
-                                                        <!--[ngClass]="{'has-error': isFieldInvalid('emailRegistration')}"-->
-                                                        <!--required/>-->
-                                                    <!--<div *ngIf="formErrors.email" class="invalid" [hidden]="!FieldInValid">-->
-                                                        <!--{{ formErrors.email }}-->
-                                                    <!--</div>-->
-                                                <!--</div>-->
-                                            <!--</div>-->
-                                        <!--</div>-->
+                                    <form [formGroup]="userFormRegistration">
+                                        <div class="xsInput">
+                                            <div class="form-group row">
+                                                <div class="col-xs-8 offset-xs-2">
+                                                    <input
+                                                        type="text"
+                                                        class="form-control"
+                                                        placeholder="Логин"
+                                                        formControlName="emailRegistration"
+                                                        [ngClass]="{'has-error': isFieldInvalid('emailRegistration')}"
+                                                        required/>
+                                                    <div *ngIf="formErrors.email" class="invalid" [hidden]="!FieldInValid">
+                                                        {{ formErrors.email }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                        <!--<div class="xsInput">-->
-                                            <!--<div class="form-group row">-->
-                                                <!--<div class="col-xs-8 offset-xs-2">-->
-                                                    <!--<input-->
-                                                        <!--type="password"-->
-                                                        <!--class="form-control"-->
-                                                        <!--placeholder="Пароль"-->
-                                                        <!--formControlName="passwordRegistration1"-->
-                                                        <!--required/>-->
-                                                <!--</div>-->
-                                            <!--</div>-->
-                                        <!--</div>-->
+                                        <div class="xsInput">
+                                            <div class="form-group row">
+                                                <div class="col-xs-8 offset-xs-2">
+                                                    <input
+                                                        type="password"
+                                                        class="form-control"
+                                                        placeholder="Пароль"
+                                                        formControlName="passwordRegistration1"
+                                                        required/>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                        <!--<div class="xsInput">-->
-                                            <!--<div class="form-group row">-->
-                                                <!--<div class="col-xs-8 offset-xs-2">-->
-                                                    <!--<input-->
-                                                        <!--type="password"-->
-                                                        <!--class="form-control"-->
-                                                        <!--placeholder="Пароль еще раз"-->
-                                                        <!--formControlName="passwordRegistration2"-->
-                                                        <!--required/>-->
-                                                <!--</div>-->
-                                            <!--</div>-->
-                                        <!--</div>-->
+                                        <div class="xsInput">
+                                            <div class="form-group row">
+                                                <div class="col-xs-8 offset-xs-2">
+                                                    <input
+                                                        type="password"
+                                                        class="form-control"
+                                                        placeholder="Пароль еще раз"
+                                                        formControlName="passwordRegistration2"
+                                                        required/>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                    <!--</form>-->
-                                <!--</clr-wizard-page>-->
+                                    </form>
+                                </clr-wizard-page>
 
                                 <clr-wizard-page>
                                     <ng-template clrPageTitle>Page 2</ng-template>

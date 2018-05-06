@@ -167,33 +167,35 @@ export class LoginComponent implements OnInit {
         console.log("this.userForm.valid:  ", this.userForm.valid);
         const username = this.userForm.value.email;
         const password = this.userForm.value.password;
-        if (this.userForm.valid) {
-            this.user.login(username, password).subscribe(
-                (success) => {
-
-                  if (success) {
-
-                    console.log('all is good!!!')
-                    this.router.navigate(['/']);
-                    // console.log('test message');
-
-                  } else {
-                    // place error handling here
-                    this.error = 'Пожалуйста, проверьте Ваш логин или пароль.';
-                    console.log('Пожалуйста, проверьте Ваш логин или пароль.');
-                    // this.blockButton = false;
-                  }
-
-                },
-                (error) => {
-                  console.log(error);
-                  // place error handling here
-                }
-              ); this.router.navigate(['/']);
-
-        } else {
-            this.validateAllFormFields(this.userForm);
-        }
+        this.router.navigate(['/']);
+        // if (this.userForm.valid) {
+        //     this.user.login(username, password).subscribe(
+        //         (success) => {
+        //
+        //           if (success) {
+        //
+        //             console.log('all is good!!!')
+        //             this.router.navigate(['/']);
+        //             // console.log('test message');
+        //
+        //           } else {
+        //             // place error handling here
+        //             // this.error = 'Пожалуйста, проверьте Ваш логин или пароль.';
+        //             // console.log('Пожалуйста, проверьте Ваш логин или пароль.');
+        //             // this.blockButton = false;
+        //               this.router.navigate(['/']);
+        //           }
+        //
+        //         },
+        //         (error) => {
+        //           console.log(error);
+        //           // place error handling here
+        //         }
+        //       ); this.router.navigate(['/']);
+        //
+        // } else {
+        //     this.validateAllFormFields(this.userForm);
+        // }
     }
 
     onOpen() {

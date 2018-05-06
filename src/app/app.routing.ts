@@ -16,24 +16,24 @@ const appRoutes: Routes = [
     {
       path: 'home',
       component: HomeComponent,
-      canActivate: [UserGuard]
+      // canActivate: [UserGuard]
     },
     {
-      path: 'login', 
+      path: 'login',
       component: LoginComponent
     },
     {
-      path: 'about', 
+      path: 'about',
       component: AboutComponent
     },
     {
       path: 'not-found',
       component: ErrorComponent,
-      canActivate: [UserGuard],
+      // canActivate: [UserGuard],
       data: {message: 'Page not found!'}
     },
     {
-      path: '**', 
+      path: '**',
       redirectTo: '/not-found'
     }
 ];
@@ -44,6 +44,6 @@ const appRoutes: Routes = [
     ],
     exports: [RouterModule]
   })
-  
+
   export class AppRoutingModule {
   }
