@@ -7,22 +7,22 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-xs-6">
-                             <button
-                             class="btn btn-link"
-                             [ngClass]="{'btn-active': isEnter}"
-                             >Вход</button>
+                            <div class="row">
+                                <div class="col-xs-6 offset-xs-3">
+                                    <div class="enter"
+                                    >Вход</div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-xs-6">
-                            <button
-                            class="btn btn-link"
+                            <div class="registration"
                             (click)="onOpen()"
-                            [ngClass]="{'btn-active': isRegistration}"
-                            >Регистрация</button>
+                            >Регистрация</div>
                             <clr-wizard #wizardlg [(clrWizardOpen)]="lgOpen" clrWizardSize="lg">
                                 <clr-wizard-title>Регистрация</clr-wizard-title>
 
                                 <clr-wizard-button [type]="'cancel'">Cancel</clr-wizard-button>
-                                <clr-wizard-button [type]="'previous'">Back</clr-wizard-button>
+                                <!--<clr-wizard-button [type]="'previous'">Back</clr-wizard-button>-->
                                 <clr-wizard-button
                                     [type]="'next'"
                                 >Next</clr-wizard-button>
@@ -91,8 +91,57 @@
                                 </clr-wizard-page>
 
                                 <clr-wizard-page>
-                                    <ng-template clrPageTitle>Page 2</ng-template>
-                                    ...
+                                    <ng-template clrPageTitle>Просмотренные фильмы</ng-template>
+                                    <clr-tabs>
+                                        <clr-tab>
+                                            <button clrTabLink>Dashboard</button>
+                                            <ng-template [(clrIfActive)]="dashboardActive">
+                                                <clr-tab-content>
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <ng-container *ngFor="let item of items">
+                                                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-6">
+                                                                    <div class="my-checkbox">
+                                                                        <div class="checkbox">
+                                                                            <input type="checkbox" id="{{item.title}}">
+                                                                            <label for="{{item.title}}">{{item.title}}</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                </clr-tab-content>
+                                            </ng-template>
+                                        </clr-tab>
+
+                                        <clr-tab>
+                                            <button clrTabLink>Management</button>
+                                            <ng-template [(clrIfActive)]="managementActive">
+                                                <clr-tab-content>
+                                                    Management
+                                                </clr-tab-content>
+                                            </ng-template>
+                                        </clr-tab>
+
+                                        <clr-tab>
+                                            <button clrTabLink>Cloud</button>
+                                            <ng-template [(clrIfActive)]="cloudActive">
+                                                <clr-tab-content>
+                                                    Cloud
+                                                </clr-tab-content>
+                                            </ng-template>
+                                        </clr-tab>
+
+                                        <clr-tab>
+                                            <button clrTabLink>Infrastructure</button>
+                                            <ng-template [(clrIfActive)]="infrastructureActive">
+                                                <clr-tab-content>
+                                                    Infrastructure
+                                                </clr-tab-content>
+                                            </ng-template>
+                                        </clr-tab>
+                                    </clr-tabs>
                                 </clr-wizard-page>
 
                                 <clr-wizard-page>

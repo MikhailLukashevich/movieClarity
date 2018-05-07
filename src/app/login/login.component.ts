@@ -6,12 +6,16 @@ import {ClrWizard} from "@clr/angular";
 
 import { UserService } from '../services/user.service';
 
+import { HomeItem } from '../home/home.model';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
+    public items: HomeItem[] = [];
 
     @ViewChild("wizardlg") wizardLarge: ClrWizard;
     lgOpen: boolean = false;
@@ -59,6 +63,15 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         this.createForm();
+
+        this.items = [
+            new HomeItem('The Fast And The Furious', 1, '../../images/action.jpg', 'action', 1920),
+            new HomeItem('Disney', 1, '../../images/cartoon.jpg', 'action', 1920),
+            new HomeItem('One day', 1, '../../images/drama.jpg', 'action', 1920),
+            new HomeItem('Ural dumplings', 1, '../../images/comedy.jpg', 'action', 1920),
+            new HomeItem('Documentary', 1, '../../images/documentary.jpg', 'action', 1920),
+            new HomeItem('Alone home', 1, '../../images/aloneHome.jpg', 'action', 1920)
+        ];
     }
 
     createForm() {

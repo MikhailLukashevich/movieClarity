@@ -26,12 +26,27 @@
     background:none;
 }
 
-.btn-active{
+.enter{
+    color:#0077b7;
     border-bottom: 2px solid #0077b7; /* Параметры линии внизу */
+}
+.registration{
+    cursor:pointer;
+    color:#0077b7;
+}
+
+.registration:hover{
+    color:#00548d;
 }
 
 .title-credential-registration{
     padding: 15px 0;
+}
+
+.my-checkbox{
+    position:relative;
+    text-align:left;
+
 }
 
 @media (max-width:768px){
