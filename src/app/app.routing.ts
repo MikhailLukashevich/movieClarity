@@ -16,7 +16,7 @@ const appRoutes: Routes = [
     {
       path: 'home',
       component: HomeComponent,
-      // canActivate: [UserGuard]
+      canActivate: [UserGuard]
     },
     {
       path: 'login',
@@ -29,7 +29,7 @@ const appRoutes: Routes = [
     {
       path: 'not-found',
       component: ErrorComponent,
-      // canActivate: [UserGuard],
+      canActivate: [UserGuard],
       data: {message: 'Page not found!'}
     },
     {

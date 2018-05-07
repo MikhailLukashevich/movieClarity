@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
     userForm: FormGroup;
     userFormRegistration: FormGroup;
     subscrValueChange: Subscription;
+    subscrValueChangeRegistration: Subscription;
     message: string = null;
     formEnable: boolean = true;
     FieldInValid: boolean;
@@ -37,16 +38,24 @@ export class LoginComponent implements OnInit {
     validationMessages = {
         'email': {
             'required': 'Укажите Ваш логин.',
-            // 'pattern': 'Please enter valid e-mail.'
         },
         'password': {
+            'required': 'Укажите Ваш пароль.'
+        },
+        'emailRegistration': {
+            'required': 'Укажите Ваш логин.',
+        },
+        'passwordRegistration1': {
+            'required': 'Укажите Ваш пароль.'
+        },
+        'passwordRegistration2': {
             'required': 'Укажите Ваш пароль.'
         }
     };
 
     constructor(private fb: FormBuilder,
                 private router: Router,
-                private user: UserService,) { }
+                private user: UserService) { }
 
     ngOnInit() {
         this.createForm();
@@ -109,6 +118,37 @@ export class LoginComponent implements OnInit {
             .subscribe(data => this.onValueChange(data));
 
         this.onValueChange(this.userForm);
+
+
+        this.subscrValueChangeRegistration = this.userFormRegistration.valueChanges
+            .subscribe(data => this.onValueChangeRegistration(data));
+        this.onValueChangeRegistration(this.userFormRegistration);
+
+    }
+
+    onValueChangeRegistration(data?: any) {
+        if (!this.userFormRegistration) {
+            return;
+        }
+        const form = this.userFormRegistration;
+        this.message = null;
+
+        for (const field in this.formErrors) {
+            if (this.formErrors.hasOwnProperty(field)) {
+                this.formErrors[field] = '';
+
+                const control = form.get(field);
+
+                if (control  && !control.valid) {
+                    const message = this.validationMessages[field];
+                    for (const key in control.errors) {
+                        if (control.errors.hasOwnProperty(key)) {
+                            this.formErrors[field] += message[key] + ' ';
+                        }
+                    }
+                }
+            }
+        }
     }
 
     onValueChange(data?: any) {
@@ -167,39 +207,64 @@ export class LoginComponent implements OnInit {
         console.log("this.userForm.valid:  ", this.userForm.valid);
         const username = this.userForm.value.email;
         const password = this.userForm.value.password;
-        this.router.navigate(['/']);
-        // if (this.userForm.valid) {
-        //     this.user.login(username, password).subscribe(
-        //         (success) => {
-        //
-        //           if (success) {
-        //
-        //             console.log('all is good!!!')
-        //             this.router.navigate(['/']);
-        //             // console.log('test message');
-        //
-        //           } else {
-        //             // place error handling here
-        //             // this.error = 'Пожалуйста, проверьте Ваш логин или пароль.';
-        //             // console.log('Пожалуйста, проверьте Ваш логин или пароль.');
-        //             // this.blockButton = false;
-        //               this.router.navigate(['/']);
-        //           }
-        //
-        //         },
-        //         (error) => {
-        //           console.log(error);
-        //           // place error handling here
-        //         }
-        //       ); this.router.navigate(['/']);
-        //
-        // } else {
-        //     this.validateAllFormFields(this.userForm);
-        // }
+        if (this.userForm.valid) {
+            this.user.login(username, password).subscribe(
+                (success) => {
+
+                  if (success) {
+
+                    console.log('all is good!!!')
+                    this.router.navigate(['/']);
+                    // console.log('test message');
+
+                  } else {
+                    // place error handling here
+                    this.error = 'Пожалуйста, проверьте Ваш логин или пароль.';
+                    console.log('Пожалуйста, проверьте Ваш логин или пароль.');
+                    // this.blockButton = false;
+                      this.router.navigate(['/']);
+                  }
+
+                },
+                (error) => {
+                  console.log(error);
+                  // place error handling here
+                }
+              ); this.router.navigate(['/']);
+
+        } else {
+            this.validateAllFormFields(this.userForm);
+        }
     }
 
     onOpen() {
         this.lgOpen = true;
+    }
+
+    testError(field) {
+
+        let passwordRegistration1 =  this.userFormRegistration.get('passwordRegistration1').value;
+        let passwordRegistration2 =  this.userFormRegistration.get('passwordRegistration2').value;
+        if (this.userFormRegistration.get('passwordRegistration1').touched && this.userFormRegistration.get('passwordRegistration2').touched && (passwordRegistration1 === passwordRegistration2)) {
+            console.log(passwordRegistration1, passwordRegistration2);
+        }
+
+        if (this.userFormRegistration.get(field)) {
+            return !this.userFormRegistration.get(field).valid && this.userFormRegistration.get(field).touched;
+        }
+
+    }
+
+    isPasswordEqual() {
+        let passwordRegistration1 =  this.userFormRegistration.get('passwordRegistration1').value;
+        let passwordRegistration2 =  this.userFormRegistration.get('passwordRegistration2').value;
+        return (passwordRegistration1 === passwordRegistration2);
+    }
+
+    onNext() {
+        if (this.userFormRegistration.valid && this.isPasswordEqual()) {
+            return false;
+        } else {return true; }
     }
 
 }

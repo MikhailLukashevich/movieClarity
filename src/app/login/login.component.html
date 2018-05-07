@@ -9,7 +9,6 @@
                         <div class="col-xs-6">
                              <button
                              class="btn btn-link"
-                             (click)="onTemplateEnter()"
                              [ngClass]="{'btn-active': isEnter}"
                              >Вход</button>
                         </div>
@@ -24,10 +23,12 @@
 
                                 <clr-wizard-button [type]="'cancel'">Cancel</clr-wizard-button>
                                 <clr-wizard-button [type]="'previous'">Back</clr-wizard-button>
-                                <clr-wizard-button [type]="'next'">Next</clr-wizard-button>
+                                <clr-wizard-button
+                                    [type]="'next'"
+                                >Next</clr-wizard-button>
                                 <clr-wizard-button [type]="'finish'">Finish</clr-wizard-button>
 
-                                <clr-wizard-page>
+                                <clr-wizard-page [clrWizardPageNextDisabled]="onNext()">
                                     <ng-template clrPageTitle>Логин & пароль</ng-template>
                                     <div class="title-credential-registration">
                                         Пожалуйста, укажите Ваш логин и пароль.
@@ -42,10 +43,10 @@
                                                         class="form-control"
                                                         placeholder="Логин"
                                                         formControlName="emailRegistration"
-                                                        [ngClass]="{'has-error': isFieldInvalid('emailRegistration')}"
+                                                        [ngClass]="{'has-error': testError('emailRegistration')}"
                                                         required/>
-                                                    <div *ngIf="formErrors.email" class="invalid" [hidden]="!FieldInValid">
-                                                        {{ formErrors.email }}
+                                                    <div *ngIf="formErrors.emailRegistration" class="invalid" [hidden]="!testError('emailRegistration')">
+                                                        {{ formErrors.emailRegistration }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -59,7 +60,11 @@
                                                         class="form-control"
                                                         placeholder="Пароль"
                                                         formControlName="passwordRegistration1"
+                                                        [ngClass]="{'has-error': testError('passwordRegistration1')}"
                                                         required/>
+                                                    <div *ngIf="formErrors.passwordRegistration1" class="invalid" [hidden]="!testError('passwordRegistration1')">
+                                                        {{ formErrors.passwordRegistration1 }}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -71,8 +76,13 @@
                                                         type="password"
                                                         class="form-control"
                                                         placeholder="Пароль еще раз"
+                                                        [ngClass]="{'has-error': testError('passwordRegistration2')}"
                                                         formControlName="passwordRegistration2"
                                                         required/>
+                                                    <div *ngIf="formErrors.passwordRegistration2" class="invalid" [hidden]="!testError('passwordRegistration2')">
+                                                        {{ formErrors.passwordRegistration2 }}
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
