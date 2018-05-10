@@ -24,6 +24,8 @@ import {SpinnerService} from './services/spinner.service';
 import {MovieDetailsComponent} from './home/movie-details/movie-details.component';
 import {MovieService} from './services/movie.service';
 
+import {PaginatorModule} from 'primeng/paginator';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -36,6 +38,8 @@ import {MovieService} from './services/movie.service';
         MovieDetailsComponent
     ],
     imports: [
+        PaginatorModule,
+
         AppRoutingModule,
         BrowserAnimationsModule,
         BrowserModule,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import {NguCarousel, NguCarouselService, NguCarouselStore} from '@ngu/carousel';
+import { NguCarousel, NguCarouselService, NguCarouselStore } from '@ngu/carousel';
 import { Router, ActivatedRoute, Params } from "@angular/router"
 
 import { HomeItem } from './home.model';
@@ -15,6 +15,8 @@ export class HomeComponent implements OnInit{
     public carousel: NguCarousel;
     public carouselStore: NguCarouselStore;
     selectedTitle: string;
+    listMovie: HomeItem[] = [];
+    returnedMovie: HomeItem[] = [];
 
     constructor(private router: Router,
                 private activatedRoute: ActivatedRoute,
@@ -23,15 +25,6 @@ export class HomeComponent implements OnInit{
 
 
     ngOnInit() {
-        this.items = [
-            new HomeItem('The Fast And The Furious', 1, '../../images/action.jpg', 'action', 1920),
-            new HomeItem('Disney', 1, '../../images/cartoon.jpg', 'action', 1920),
-            new HomeItem('One day', 1, '../../images/drama.jpg', 'action', 1920),
-            new HomeItem('Ural dumplings', 1, '../../images/comedy.jpg', 'action', 1920),
-            new HomeItem('Documentary', 1, '../../images/documentary.jpg', 'action', 1920),
-            new HomeItem('Alone home', 1, '../../images/aloneHome.jpg', 'action', 1920)
-        ];
-
         this.carouselService.getData.subscribe((value => {
             console.log(value);
         }), (error1 => {
@@ -84,6 +77,9 @@ export class HomeComponent implements OnInit{
                 .getAll()
                 .then(result => this.items = result);
         });
+
+        this.listMovie = this.movieService.getAllTest();
+        this.returnedMovie = this.listMovie.slice(0, 6);
     }
 
     initDataFn(carouselStore: NguCarouselStore ) {
@@ -104,5 +100,12 @@ export class HomeComponent implements OnInit{
 
     onSelect(selected: HomeItem) {
         this.router.navigate(["/home", selected.title]);
+    }
+
+    paginate(event): void {
+        const startItem = (event.page) * event['rows'];
+        const endItem = (event.page + 1) * event['rows'];
+
+        this.returnedMovie = this.listMovie.slice(startItem, endItem);
     }
 }

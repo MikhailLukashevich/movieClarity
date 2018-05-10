@@ -8,6 +8,9 @@ let movies = [
     new HomeItem('One day', 1, '../../images/drama.jpg', 'action', 1920),
     new HomeItem('Ural dumplings', 1, '../../images/comedy.jpg', 'action', 1920),
     new HomeItem('Documentary', 1, '../../images/documentary.jpg', 'action', 1920),
+    new HomeItem('Alone home', 1, '../../images/aloneHome.jpg', 'action', 1920),
+    new HomeItem('Ural dumplings', 1, '../../images/comedy.jpg', 'action', 1920),
+    new HomeItem('Documentary', 1, '../../images/documentary.jpg', 'action', 1920),
     new HomeItem('Alone home', 1, '../../images/aloneHome.jpg', 'action', 1920)
 ];
 
@@ -19,6 +22,10 @@ export class MovieService {
 
     getAll(): Promise<HomeItem[]> {
         return moviesPromise;
+    }
+
+    getAllTest(){
+        return movies;
     }
 
     getMovie(title: string): Promise<HomeItem> {
