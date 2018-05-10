@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { ErrorComponent } from './error/error.component'
+import { MovieDetailsComponent } from './home/movie-details/movie-details.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { UserGuard } from './services/user-guard.service';
@@ -17,6 +18,10 @@ const appRoutes: Routes = [
       path: 'home',
       component: HomeComponent,
       canActivate: [UserGuard]
+    },
+    {
+        path: "home/:id",
+        component: MovieDetailsComponent
     },
     {
       path: 'login',

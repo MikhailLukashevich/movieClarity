@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import {NguCarousel, NguCarouselService, NguCarouselStore} from '@ngu/carousel';
+import { Router, ActivatedRoute, Params } from "@angular/router"
 
 import { HomeItem } from './home.model';
+import { MovieService } from '../services/movie.service';
 
 @Component({
     styleUrls: ['./home.component.scss'],
@@ -12,9 +14,12 @@ export class HomeComponent implements OnInit{
     public items: HomeItem[] = [];
     public carousel: NguCarousel;
     public carouselStore: NguCarouselStore;
+    selectedTitle: string;
 
-    constructor(private carouselService: NguCarouselService) {
-    }
+    constructor(private router: Router,
+                private activatedRoute: ActivatedRoute,
+                private carouselService: NguCarouselService,
+                private movieService: MovieService) {}
 
 
     ngOnInit() {
@@ -72,6 +77,13 @@ export class HomeComponent implements OnInit{
             easing: 'ease',
             animation: 'lazy'
         }
+
+        this.activatedRoute.params.forEach((params: Params) => {
+            this.selectedTitle = params["title"];
+            this.movieService
+                .getAll()
+                .then(result => this.items = result);
+        });
     }
 
     initDataFn(carouselStore: NguCarouselStore ) {
@@ -88,5 +100,9 @@ export class HomeComponent implements OnInit{
 
     onmoveFn(carouselStore: NguCarouselStore) {
         this.carouselStore = carouselStore;
+    }
+
+    onSelect(selected: HomeItem) {
+        this.router.navigate(["/home", selected.title]);
     }
 }

@@ -31,19 +31,19 @@
                     <div class="card-block">
 
                         <div class="row">
-                            <div class="col-xs-12 col-sm-6 col-md-12 col-lg-12 col-xl-5">
+                            <div class="col-xs-12 col-sm-6 col-md-12 col-lg-12 col-xl-5" (click)="onSelect(item)">
                                 <img src="{{item.img}}"/>
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-12 col-lg-12 col-xl-7">
                                 <div class="my-card-text">
-                                    <div class="title">
+                                    <div class="title" (click)="onSelect(item)">
                                         <h4>{{item.title}}</h4>
                                         <clr-icon shape="star" class="is-solid my-star"></clr-icon>
                                         <clr-icon shape="star" class="is-solid my-star"></clr-icon>
                                         <clr-icon shape="star" class="is-solid my-star"></clr-icon>
                                     </div>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, porro.</p>
-                                    <div class="btn-more">
+                                    <div class="btn-more" (click)="onSelect(item)">
                                         <clr-icon shape="redo"></clr-icon> Read more
                                     </div>
                                 </div>

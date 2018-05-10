@@ -21,6 +21,8 @@ import {UserService} from './services/user.service';
 import {UserGuard} from './services/user-guard.service';
 import {StorageService} from './services/storage.service';
 import {SpinnerService} from './services/spinner.service';
+import {MovieDetailsComponent} from './home/movie-details/movie-details.component';
+import {MovieService} from './services/movie.service';
 
 @NgModule({
     declarations: [
@@ -30,7 +32,8 @@ import {SpinnerService} from './services/spinner.service';
         HeaderComponent,
         LoginComponent,
         FooterComponent,
-        ErrorComponent
+        ErrorComponent,
+        MovieDetailsComponent
     ],
     imports: [
         AppRoutingModule,
@@ -46,7 +49,8 @@ import {SpinnerService} from './services/spinner.service';
         UserService,
         UserGuard,
         StorageService,
-        SpinnerService
+        SpinnerService,
+        MovieService
     ],
     bootstrap: [AppComponent]
 })
