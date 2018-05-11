@@ -20,7 +20,7 @@ const appRoutes: Routes = [
       canActivate: [UserGuard]
     },
     {
-        path: "home/:id",
+        path: "details/:id",
         component: MovieDetailsComponent
     },
     {

@@ -2,21 +2,54 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="card">
-                <div class="card-block">
-
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-md-12 col-lg-12 col-xl-5">
-                            <img src="{{movie.img}}"/>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="title-header">
+                            <h3>
+                                {{movie.title}}
+                            </h3>
                         </div>
-                        <div class="col-xs-12 col-sm-6 col-md-12 col-lg-12 col-xl-7">
-                            <div class="my-card-text">
-                                <div class="title">
-                                    <h4>{{movie.title}}</h4>
-                                    <clr-icon shape="star" class="is-solid my-star"></clr-icon>
-                                    <clr-icon shape="star" class="is-solid my-star"></clr-icon>
-                                    <clr-icon shape="star" class="is-solid my-star"></clr-icon>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-5">
+                        <img src="{{movie.img}}"/>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-7">
+                        <div class="my-card-text">
+                            <div class="title">
+                                <!--<h4>{{movie.title}}</h4>-->
+                                <clr-icon shape="star" class="is-solid my-star"></clr-icon>
+                                <clr-icon shape="star" class="is-solid my-star"></clr-icon>
+                                <clr-icon shape="star" class="is-solid my-star"></clr-icon>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <p><b>Страна:</b></p>
                                 </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consectetur doloremque dolores magni, placeat possimus rerum sint veritatis vitae voluptate!</p>
+                                <div class="col-xs-6">
+                                    <p>Россия</p>
+                                </div>
+                                <div class="col-xs-6">
+                                    <p><b>Год:</b></p>
+                                </div>
+                                <div class="col-xs-6">
+                                    <p>2012</p>
+                                </div>
+                                <div class="col-xs-6">
+                                    <p><b>Продолжительность:</b></p>
+                                </div>
+                                <div class="col-xs-6">
+                                    <p>24мин</p>
+                                </div>
+                                <div class="col-xs-12">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem cupiditate dicta dolorem hic, in labore necessitatibus nesciunt quis quisquam quod sapiente tenetur vero. Ad enim itaque obcaecati rerum, sapiente temporibus?</p>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div class="btn-back" (click)="onBack()">
+                                        <clr-icon shape="history"></clr-icon> Назад
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

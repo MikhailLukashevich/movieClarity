@@ -99,7 +99,7 @@ export class HomeComponent implements OnInit{
     }
 
     onSelect(selected: HomeItem) {
-        this.router.navigate(["/home", selected.title]);
+        this.router.navigate(["/details", selected.title]);
     }
 
     paginate(event): void {

@@ -27,4 +27,8 @@ export class MovieDetailsComponent implements OnInit {
         });
     }
 
+    onBack() {
+        this.router.navigate(["/home"]);
+    }
+
 }
