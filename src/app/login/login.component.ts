@@ -259,7 +259,6 @@ export class LoginComponent implements OnInit {
         let passwordRegistration1 =  this.userFormRegistration.get('passwordRegistration1').value;
         let passwordRegistration2 =  this.userFormRegistration.get('passwordRegistration2').value;
         if (this.userFormRegistration.get('passwordRegistration1').touched && this.userFormRegistration.get('passwordRegistration2').touched && (passwordRegistration1 === passwordRegistration2)) {
-            console.log(passwordRegistration1, passwordRegistration2);
         }
 
         if (this.userFormRegistration.get(field)) {

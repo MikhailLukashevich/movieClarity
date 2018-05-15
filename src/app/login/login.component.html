@@ -94,7 +94,7 @@
                                     <ng-template clrPageTitle>Просмотренные фильмы</ng-template>
                                     <clr-tabs>
                                         <clr-tab>
-                                            <button clrTabLink>Dashboard</button>
+                                            <button clrTabLink>Список 1</button>
                                             <ng-template [(clrIfActive)]="dashboardActive">
                                                 <clr-tab-content>
                                                     <div class="container">
@@ -116,25 +116,31 @@
                                         </clr-tab>
 
                                         <clr-tab>
-                                            <button clrTabLink>Management</button>
+                                            <button clrTabLink>Список 2</button>
                                             <ng-template [(clrIfActive)]="managementActive">
                                                 <clr-tab-content>
+                                                    Management
+                                                    Management
+                                                    Management
                                                     Management
                                                 </clr-tab-content>
                                             </ng-template>
                                         </clr-tab>
 
                                         <clr-tab>
-                                            <button clrTabLink>Cloud</button>
+                                            <button clrTabLink>Список 3</button>
                                             <ng-template [(clrIfActive)]="cloudActive">
                                                 <clr-tab-content>
+                                                    Cloud
+                                                    Cloud
+                                                    Cloud
                                                     Cloud
                                                 </clr-tab-content>
                                             </ng-template>
                                         </clr-tab>
 
                                         <clr-tab>
-                                            <button clrTabLink>Infrastructure</button>
+                                            <button clrTabLink>Список 4</button>
                                             <ng-template [(clrIfActive)]="infrastructureActive">
                                                 <clr-tab-content>
                                                     Infrastructure
@@ -144,10 +150,6 @@
                                     </clr-tabs>
                                 </clr-wizard-page>
 
-                                <clr-wizard-page>
-                                    <ng-template clrPageTitle>Page 3</ng-template>
-                                    ...
-                                </clr-wizard-page>
                             </clr-wizard>
                         </div>
                     </div>
