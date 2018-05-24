@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, Params } from "@angular/router";
 import { MovieService } from '../../services/movie.service';
 
 import { HomeItem } from '../home.model';
+import { Film } from '../../data/film.model';
 
 @Component({
     selector: 'app-movie-details',
@@ -11,8 +12,7 @@ import { HomeItem } from '../home.model';
 })
 export class MovieDetailsComponent implements OnInit {
 
-    movie: HomeItem;
-
+    movie: Film;
     constructor(private router: Router,
                 private activatedRoute: ActivatedRoute,
                 private service: MovieService) {

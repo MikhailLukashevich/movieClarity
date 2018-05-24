@@ -2,33 +2,43 @@ import {
     EventEmitter,
     Injectable
   } from '@angular/core';
-  
+
   import {
     HttpClient,
     HttpErrorResponse,
     HttpHeaders
   } from '@angular/common/http';
-  
+
   import {Observable} from 'rxjs/Observable';
   import {of} from 'rxjs/observable/of';
   import {map, catchError, finalize} from 'rxjs/operators';
-  
+
   import {SpinnerService} from './spinner.service';
   import {BehaviorSubject} from 'rxjs/BehaviorSubject';
   import {StorageService} from './storage.service';
 
-  @Injectable()
+  import {User} from '../data/user.model';
+  import {Film} from '../data/film.model';
+
+
+@Injectable()
 export class UserService {
 
     email: string; // user e-mail
-  private user: any;
+    private films: Film[] = null;
+    private film: Film = null;
+    private user: User;
 
   authenticated = new EventEmitter<boolean>();
 
   private USER = 'user_v1';
   private ORIGIN = 'origin_v1';
-  private LOGIN_URL = 'http://206.189.58.168:8080/login';
-  private LOGOUT_URL = 'http://206.189.58.168:8080/logout';
+  // private LOGIN_URL = 'http://206.189.58.168:8080/login';
+  private LOGIN_URL = 'http://ym.easy4.fun/api/v1/login/';
+  // private LOGOUT_URL = 'http://206.189.58.168:8080/logout';
+  private LOGOUT_URL = 'http://ym.easy4.fun/api/v1/logout/';
+  private REGISTER_URL = 'http://ym.easy4.fun/api/v1/register/';
+  private FILM_URL = 'http://ym.easy4.fun/api/v1/film/';
 
   constructor(private http: HttpClient,
               private spinner: SpinnerService,
@@ -47,12 +57,12 @@ export class UserService {
   }
 
   authenticate(): Observable<boolean> {
-
     // reset all attributes
     this.clear();
 
     // any user credentials?
     const token = this.getToken();
+    console.log('token', token);
     if (!token) {
       this.authenticated.emit(false);
       return of(false);
@@ -65,12 +75,12 @@ export class UserService {
     return this.http.get<any>(this.LOGIN_URL, {headers: headers}).pipe(
       // parse personal data
       map(data => {
-
+          console.log('MAP 1221');
         try {
 
           this.user = data;
-          this.email = data['login'];
-
+          console.log('data', data);
+          this.email = data['username'];
           this.authenticated.emit(true);
           return true;
 
@@ -127,15 +137,15 @@ export class UserService {
 
   logout(): Observable<boolean> {
     const token = this.getToken();
-  
+
     if (!token) {
       this.authenticated.emit(false);
       return of(false);
     }
-  
+
     this.spinner.start();
     const headers = new HttpHeaders().set('Authorization', token);
-  
+
     return new Observable(observer => {
       this.http.get(this.LOGOUT_URL, {
         headers: headers
@@ -188,5 +198,52 @@ export class UserService {
   get userProfile(): any {
     return this.user;
   }
+
+      // getUserProfile() {
+      //     return new Promise((resolve, reject) => {
+      //         const token = this.getToken();
+      //         const headers = new HttpHeaders().set('Authorization', token);
+      //     });
+      // }
+
+   createUser(data: User): Promise<User>{
+      const token = this.getToken();
+      return new Promise<User>((resolve, reject) => {
+          const headers = new HttpHeaders().set('Authorization', token);
+          this.http.post(this.REGISTER_URL, data, {
+            headers: headers
+          }).subscribe(
+              (result: User) => {
+                  this.user = new User(result)
+              },
+              (err) => {
+                  reject(err)
+              }
+          );
+      });
+   }
+
+    getFilms(): Promise<Film[]> {
+      const token = 'Basic eW1hZG1pbjoxMjNlYXN5';
+      const headers = new HttpHeaders().set('Authorization', token);
+      return new Promise<Film[]>((resolve, reject) => {
+
+          this.http.get(this.FILM_URL, {
+              headers: headers
+          }).subscribe(
+              (result: Film[]) => {
+                  this.films = [];
+                  // TODO Rebuild using Lodash library
+                  for (let i = 0; i < result.length; i++) {
+                      this.films[i] = new Film(result[i]);
+                  }
+                  resolve(this.films);
+              },
+              (err) => {
+                  reject(err);
+              }
+          )
+      });
+    }
 
 }

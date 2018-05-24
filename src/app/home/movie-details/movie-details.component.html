@@ -6,7 +6,7 @@
                     <div class="col-xs-12">
                         <div class="title-header">
                             <h3>
-                                {{movie.title}}
+                                {{movie.name}}
                             </h3>
                         </div>
                     </div>
@@ -28,23 +28,23 @@
                                     <p><b>Страна:</b></p>
                                 </div>
                                 <div class="col-xs-6">
-                                    <p>Россия</p>
+                                    <p>{{movie.country}}</p>
                                 </div>
                                 <div class="col-xs-6">
                                     <p><b>Год:</b></p>
                                 </div>
                                 <div class="col-xs-6">
-                                    <p>2012</p>
+                                    <p>{{movie.year}}</p>
                                 </div>
                                 <div class="col-xs-6">
                                     <p><b>Продолжительность:</b></p>
                                 </div>
                                 <div class="col-xs-6">
-                                    <p>24мин</p>
+                                    <p>{{movie.time}}</p>
                                 </div>
-                                <div class="col-xs-12">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem cupiditate dicta dolorem hic, in labore necessitatibus nesciunt quis quisquam quod sapiente tenetur vero. Ad enim itaque obcaecati rerum, sapiente temporibus?</p>
-                                </div>
+                                    <div class="col-xs-12">
+                                        <p>{{movie.description}}</p>
+                                    </div>
                                 <div class="col-xs-3">
                                     <div class="btn-back" (click)="onBack()">
                                         <clr-icon shape="history"></clr-icon> Назад

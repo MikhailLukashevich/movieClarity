@@ -3,7 +3,10 @@ import { NguCarousel, NguCarouselService, NguCarouselStore } from '@ngu/carousel
 import { Router, ActivatedRoute, Params } from "@angular/router"
 
 import { HomeItem } from './home.model';
+import { Film } from '../data/film.model';
 import { MovieService } from '../services/movie.service';
+import { UserService } from '../services/user.service';
+import { SpinnerService } from '../services/spinner.service';
 
 @Component({
     styleUrls: ['./home.component.scss'],
@@ -11,17 +14,19 @@ import { MovieService } from '../services/movie.service';
 })
 export class HomeComponent implements OnInit{
 
-    public items: HomeItem[] = [];
     public carousel: NguCarousel;
     public carouselStore: NguCarouselStore;
     selectedTitle: string;
-    listMovie: HomeItem[] = [];
-    returnedMovie: HomeItem[] = [];
+    returnedMovie: Film[] = [];
+    data: Film[] = [];
+    items: Film[] = [];
 
     constructor(private router: Router,
                 private activatedRoute: ActivatedRoute,
                 private carouselService: NguCarouselService,
-                private movieService: MovieService) {}
+                private movieService: MovieService,
+                private userService: UserService,
+                private spinner: SpinnerService) {}
 
 
     ngOnInit() {
@@ -71,15 +76,44 @@ export class HomeComponent implements OnInit{
             animation: 'lazy'
         }
 
-        this.activatedRoute.params.forEach((params: Params) => {
-            this.selectedTitle = params["title"];
-            this.movieService
-                .getAll()
-                .then(result => this.items = result);
-        });
+        // this.activatedRoute.params.forEach((params: Params) => {
+        //     this.selectedTitle = params["name"];
+        //     if (this.data) {
+        //         this.movieService
+        //             .getAll()
+        //             .then(result => this.data = result);
+        //     }
+        // });
 
-        this.listMovie = this.movieService.getAllTest();
-        this.returnedMovie = this.listMovie.slice(0, 6);
+        this.loadFilms();
+    }
+
+    abc() {
+        this.activatedRoute.params.forEach((params: Params) => {
+            this.selectedTitle = params["name"];
+            if (this.data) {
+                this.movieService
+                    .getAll()
+                    .then(result => this.data = result);
+            }
+        });
+    }
+
+    loadFilms() {
+        this.spinner.start();
+        this.userService.getFilms()
+            .then((result: Film[]) => {
+                this.data = result;
+                this.returnedMovie = this.data.slice(0, 10);
+                this.items = this.returnedMovie;
+                this.abc();
+                this.spinner.stop();
+            })
+            .catch((err) => {
+                this.data = null;
+                console.log('ERROR', err)
+                this.spinner.stop();
+            });
     }
 
     initDataFn(carouselStore: NguCarouselStore ) {
@@ -98,14 +132,15 @@ export class HomeComponent implements OnInit{
         this.carouselStore = carouselStore;
     }
 
-    onSelect(selected: HomeItem) {
-        this.router.navigate(["/details", selected.title]);
+    onSelect(selected: Film) {
+        this.router.navigate(["/details", selected.name]);
     }
 
     paginate(event): void {
         const startItem = (event.page) * event['rows'];
         const endItem = (event.page + 1) * event['rows'];
 
-        this.returnedMovie = this.listMovie.slice(startItem, endItem);
+        this.returnedMovie = this.data.slice(startItem, endItem);
+        this.items = this.returnedMovie;
     }
 }
