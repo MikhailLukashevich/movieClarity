@@ -15,6 +15,7 @@ export class Film {
     public url: string = '';
     public actors: string = '';
     public country: string = '';
+    public activeChoice?: boolean;
 
     constructor(film: object) {
         if (film) {
@@ -34,6 +35,7 @@ export class Film {
             this.url = film['url'] || '';
             this.actors = film['actors'] || '';
             this.country = film['country'] || '';
+            this.activeChoice = false;
         }
     }
 

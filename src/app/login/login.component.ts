@@ -5,8 +5,11 @@ import { Router } from '@angular/router';
 import {ClrWizard} from "@clr/angular";
 
 import { UserService } from '../services/user.service';
+import { SpinnerService } from '../services/spinner.service';
 
 import { HomeItem } from '../home/home.model';
+import { Film } from "../data/film.model";
+import { User } from "../data/user.model";
 
 @Component({
   selector: 'app-login',
@@ -15,7 +18,14 @@ import { HomeItem } from '../home/home.model';
 })
 export class LoginComponent implements OnInit {
 
-    public items: HomeItem[] = [];
+    items: HomeItem[] = [];
+    data: Film[] = [];
+    listFilm_1: Film[] = [];
+    listFilm_2: Film[] = [];
+    listFilm_3: Film[] = [];
+    listFilm_4: Film[] = [];
+    listFilm_5: Film[] = [];
+    user: User = new User(null);
 
     @ViewChild("wizardlg") wizardLarge: ClrWizard;
     lgOpen: boolean = false;
@@ -28,8 +38,8 @@ export class LoginComponent implements OnInit {
     formEnable: boolean = true;
     FieldInValid: boolean;
     isEnter: boolean = true;
-    isRegistration: boolean;
     error: String;
+
 
     formErrors = {
         'email': '',
@@ -59,7 +69,8 @@ export class LoginComponent implements OnInit {
 
     constructor(private fb: FormBuilder,
                 private router: Router,
-                private user: UserService) { }
+                private userService: UserService,
+                private spinner: SpinnerService) { }
 
     ngOnInit() {
         this.createForm();
@@ -136,6 +147,32 @@ export class LoginComponent implements OnInit {
         this.subscrValueChangeRegistration = this.userFormRegistration.valueChanges
             .subscribe(data => this.onValueChangeRegistration(data));
         this.onValueChangeRegistration(this.userFormRegistration);
+
+        this.loadFilms();
+
+    }
+
+    loadFilms() {
+        this.spinner.start();
+        this.userService.getFilms()
+            .then((result: Film[]) => {
+                this.data = result;
+                this.divideListFilms(this.data);
+                this.spinner.stop();
+            })
+            .catch((err) => {
+                this.data = null;
+                console.log('ERROR', err)
+                this.spinner.stop();
+            });
+    }
+
+    divideListFilms (data: Film[]) {
+        this.listFilm_1 = data.slice(0, 20);
+        this.listFilm_2 = data.slice(21, 40);
+        this.listFilm_3 = data.slice(41, 60);
+        this.listFilm_4 = data.slice(61, 80);
+        this.listFilm_5 = data.slice(81, 100);
 
     }
 
@@ -221,7 +258,7 @@ export class LoginComponent implements OnInit {
         const username = this.userForm.value.email;
         const password = this.userForm.value.password;
         if (this.userForm.valid) {
-            this.user.login(username, password).subscribe(
+            this.userService.login(username, password).subscribe(
                 (success) => {
 
                   if (success) {
@@ -277,6 +314,105 @@ export class LoginComponent implements OnInit {
         if (this.userFormRegistration.valid && this.isPasswordEqual()) {
             return false;
         } else {return true; }
+    }
+
+    onSelectListFilm_1(item) {
+        for (let i = 0; i < this.listFilm_1.length; i++) {
+            if (this.listFilm_1[i]['name'] === item['name']) {
+                this.listFilm_1[i]['watched'] = !this.listFilm_1[i]['watched'];
+            }
+        }
+    }
+
+    onSelectListFilm_2(item) {
+        for (let i = 0; i < this.listFilm_2.length; i++) {
+            if (this.listFilm_2[i]['name'] === item['name']) {
+                this.listFilm_2[i]['watched'] = !this.listFilm_2[i]['watched'];
+            }
+        }
+    }
+
+    onSelectListFilm_3(item) {
+        for (let i = 0; i < this.listFilm_3.length; i++) {
+            if (this.listFilm_3[i]['name'] === item['name']) {
+                this.listFilm_3[i]['watched'] = !this.listFilm_3[i]['watched'];
+            }
+        }
+    }
+
+    onSelectListFilm_4(item) {
+        for (let i = 0; i < this.listFilm_4.length; i++) {
+            if (this.listFilm_4[i]['name'] === item['name']) {
+                this.listFilm_4[i]['watched'] = !this.listFilm_4[i]['watched'];
+            }
+        }
+    }
+
+    onSubmitRegister() {
+        this.user.films = [];
+        this.user.username = this.userFormRegistration.value.emailRegistration;
+        this.user.password = this.userFormRegistration.value.passwordRegistration1;
+        const list = [];
+        for (let i = 0; i < this.listFilm_1.length; i++) {
+            if (this.listFilm_1[i]['watched']) {
+                list.push(this.listFilm_1[i]);
+            }
+        }
+        for (let i = 0; i < this.listFilm_2.length; i++) {
+            if (this.listFilm_2[i]['watched']) {
+                list.push(this.listFilm_2[i]);
+            }
+        }
+        for (let i = 0; i < this.listFilm_3.length; i++) {
+            if (this.listFilm_3[i]['watched']) {
+                list.push(this.listFilm_3[i]);
+            }
+        }
+        for (let i = 0; i < this.listFilm_4.length; i++) {
+            if (this.listFilm_4[i]['watched']) {
+                list.push(this.listFilm_4[i]);
+            }
+        }
+
+        for (let i = 0; i < list.length; i++) {
+            if (list.length) {
+                const film = {};
+                film['img'] = list[i].img;
+                film['country']  = list[i].country;
+                film['imdb']  = list[i].imdb;
+                film['time']  = list[i].time;
+                film['name']  = list[i].name;
+                film['actors']  = list[i].actors;
+                film['producer']  = list[i].producer;
+                film['year']  = list[i].year;
+                film['kp']  = list[i].kp;
+                film['director']  = list[i].director;
+                film['genre']  = list[i].genre;
+                film['url']  = list[i].url;
+                film['id']  = list[i].id;
+                film['watched']  = list[i].watched;
+                film['rating']  = list[i].rating;
+                film['description']  = list[i].description;
+                this.user.films.push(new Film (film));
+            }
+        }
+        console.log('this.user', this.user);
+
+        if (this.userFormRegistration.valid) {
+            this.userService.createUser(this.user).then(
+                (userProfile) => {
+                    console.log('Registration', userProfile);
+                    this.router.navigate(['/']);
+                }
+            ).catch(
+                (err) => {
+                    console.log('No Registration', err);
+                    this.onOpen();
+                }
+            );
+        } else {
+            console.log('userFormRegistration is Invalid');
+        }
     }
 
 }

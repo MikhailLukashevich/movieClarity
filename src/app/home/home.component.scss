@@ -72,6 +72,7 @@
 
 .card-block{
     padding:10px;
+    height: 220px;
 }
 
 .title{
@@ -123,6 +124,10 @@ img{
         color:red;
         margin-top:25px;
     }
+
+    .card-block{
+        height: 430px;
+    }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -130,11 +135,31 @@ img{
     .my-card-text{
         margin-top:15px;
     }
+    .card-block{
+        height: 430px;
+    }
 }
 
-@media only screen and (max-width: 544px) {
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+
+    img {
+        height:230px;
+    }
+    .card-block{
+        height: 250px;
+    }
+}
+
+@media only screen and (max-width: 575px) {
 
     .my-card-text{
         margin-top:15px;
+    }
+
+    img {
+        height:250px;
+    }
+    .card-block{
+        height: 270px;
     }
 }

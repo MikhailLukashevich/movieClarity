@@ -62,7 +62,6 @@ export class UserService {
 
     // any user credentials?
     const token = this.getToken();
-    console.log('token', token);
     if (!token) {
       this.authenticated.emit(false);
       return of(false);
@@ -75,11 +74,9 @@ export class UserService {
     return this.http.get<any>(this.LOGIN_URL, {headers: headers}).pipe(
       // parse personal data
       map(data => {
-          console.log('MAP 1221');
         try {
 
           this.user = data;
-          console.log('data', data);
           this.email = data['username'];
           this.authenticated.emit(true);
           return true;
@@ -206,8 +203,9 @@ export class UserService {
       //     });
       // }
 
-   createUser(data: User): Promise<User>{
-      const token = this.getToken();
+   createUser(data: User): Promise<User> {
+      const token = 'Basic eW1hZG1pbjoxMjNlYXN5';
+       this.spinner.start();
       return new Promise<User>((resolve, reject) => {
           const headers = new HttpHeaders().set('Authorization', token);
           this.http.post(this.REGISTER_URL, data, {
@@ -215,9 +213,12 @@ export class UserService {
           }).subscribe(
               (result: User) => {
                   this.user = new User(result)
+                  this.spinner.stop();
               },
               (err) => {
                   reject(err)
+                  this.spinner.stop();
+                  console.log('  reject(err)', err);
               }
           );
       });

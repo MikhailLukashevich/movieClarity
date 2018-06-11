@@ -26,7 +26,7 @@
                                 <clr-wizard-button
                                     [type]="'next'"
                                 >Next</clr-wizard-button>
-                                <clr-wizard-button [type]="'finish'">Finish</clr-wizard-button>
+                                <clr-wizard-button [type]="'finish'" (click)="onSubmitRegister()">Finish</clr-wizard-button>
 
                                 <clr-wizard-page [clrWizardPageNextDisabled]="onNext()">
                                     <ng-template clrPageTitle>Логин & пароль</ng-template>
@@ -99,14 +99,9 @@
                                                 <clr-tab-content>
                                                     <div class="container">
                                                         <div class="row">
-                                                            <ng-container *ngFor="let item of items">
-                                                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-6">
-                                                                    <div class="my-checkbox">
-                                                                        <div class="checkbox">
-                                                                            <input type="checkbox" id="{{item.title}}">
-                                                                            <label for="{{item.title}}">{{item.title}}</label>
-                                                                        </div>
-                                                                    </div>
+                                                            <ng-container *ngFor="let item of listFilm_1">
+                                                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                                                    <div (click)="onSelectListFilm_1(item)" [ngClass]="{'activeFilm': item['watched']}">{{item['name']}}</div>
                                                                 </div>
                                                             </ng-container>
                                                         </div>
@@ -119,10 +114,15 @@
                                             <button clrTabLink>Список 2</button>
                                             <ng-template [(clrIfActive)]="managementActive">
                                                 <clr-tab-content>
-                                                    Management
-                                                    Management
-                                                    Management
-                                                    Management
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <ng-container *ngFor="let item of listFilm_2">
+                                                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                                                    <div (click)="onSelectListFilm_2(item)" [ngClass]="{'activeFilm': item['watched']}">{{item['name']}}</div>
+                                                                </div>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
                                                 </clr-tab-content>
                                             </ng-template>
                                         </clr-tab>
@@ -131,10 +131,15 @@
                                             <button clrTabLink>Список 3</button>
                                             <ng-template [(clrIfActive)]="cloudActive">
                                                 <clr-tab-content>
-                                                    Cloud
-                                                    Cloud
-                                                    Cloud
-                                                    Cloud
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <ng-container *ngFor="let item of listFilm_3" class="list-films">
+                                                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                                                    <div (click)="onSelectListFilm_3(item)" [ngClass]="{'activeFilm': item['watched']}">{{item['name']}}</div>
+                                                                </div>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
                                                 </clr-tab-content>
                                             </ng-template>
                                         </clr-tab>
@@ -143,7 +148,15 @@
                                             <button clrTabLink>Список 4</button>
                                             <ng-template [(clrIfActive)]="infrastructureActive">
                                                 <clr-tab-content>
-                                                    Infrastructure
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <ng-container *ngFor="let item of listFilm_4" class="list-films">
+                                                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                                                    <div (click)="onSelectListFilm_4(item)" [ngClass]="{'activeFilm': item['watched']}">{{item['name']}}</div>
+                                                                </div>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
                                                 </clr-tab-content>
                                             </ng-template>
                                         </clr-tab>
